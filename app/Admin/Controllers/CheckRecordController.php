@@ -10,9 +10,10 @@ use App\Admin\Repositories\CheckRecord;
 use App\Models\AdminUser;
 use App\Models\CheckTrack;
 use App\Models\DeviceRecord;
-use App\Services\CheckService;
+use App\Models\PartRecord;
+use App\Models\SoftwareRecord;
+use App\Services\CheckRecordService;
 use App\Support\Data;
-use App\Support\Info;
 use App\Support\Track;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Form;
@@ -31,7 +32,7 @@ class CheckRecordController extends AdminController
 
     public function exportReport($check_id)
     {
-        return CheckService::report($check_id);
+        return CheckRecordService::report($check_id);
     }
 
     /**
@@ -54,7 +55,16 @@ class CheckRecordController extends AdminController
                     return '任务状态异常';
                 } else {
                     $check_item = $check->check_item;
-                    $item = Info::getItemRecordByClass($check_item, $item_id);
+                    switch ($check_item) {
+                        case 'part':
+                            $item = PartRecord::where('id', $item_id)->first();
+                            break;
+                        case 'software':
+                            $item = SoftwareRecord::where('id', $item_id)->first();
+                            break;
+                        default:
+                            $item = DeviceRecord::where('id', $item_id)->first();
+                    }
                     if (empty($item)) {
                         return '物品状态异常';
                     } else {
@@ -228,19 +238,12 @@ class CheckRecordController extends AdminController
 
             // 保存回调，创建盘点任务的同时，自动生成与之相关的全部盘点追踪记录
             $form->saved(function (Form $form) {
-                $items = [];
                 switch ($form->check_item) {
                     case 'part':
-                        $class = "Celaraze\\Chemex\\Part\\Models\\PartRecord";
-                        if (class_exists($class)) {
-                            $items = $class::all();
-                        }
+                        $items = PartRecord::all();
                         break;
                     case 'software':
-                        $class = "Celaraze\\Chemex\\Software\\Models\\SoftwareRecord";
-                        if (class_exists($class)) {
-                            $items = $class::all();
-                        }
+                        $items = SoftwareRecord::all();
                         break;
                     default:
                         $items = DeviceRecord::all();

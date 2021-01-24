@@ -16,6 +16,12 @@ class UpdateItemsAssetNumberColumn extends Migration
         Schema::table('device_records', function (Blueprint $table) {
             $table->string('asset_number')->nullable()->unique();
         });
+        Schema::table('hardware_records', function (Blueprint $table) {
+            $table->string('asset_number')->nullable()->unique();
+        });
+        Schema::table('software_records', function (Blueprint $table) {
+            $table->string('asset_number')->nullable()->unique();
+        });
     }
 
     /**
@@ -26,6 +32,12 @@ class UpdateItemsAssetNumberColumn extends Migration
     public function down()
     {
         Schema::table('device_records', function (Blueprint $table) {
+            $table->dropColumn('asset_number');
+        });
+        Schema::table('hardware_records', function (Blueprint $table) {
+            $table->dropColumn('asset_number');
+        });
+        Schema::table('software_records', function (Blueprint $table) {
             $table->dropColumn('asset_number');
         });
     }

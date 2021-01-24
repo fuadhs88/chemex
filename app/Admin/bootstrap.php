@@ -25,6 +25,39 @@ use Dcat\Admin\Layout\Navbar;
 
 ConfigService::init();
 
+/**
+ * 自定义全局CSS
+ */
+Admin::style(
+    <<<CSS
+.main-footer {
+    display: none;
+}
+
+.navbar{
+    margin: 0 35px 0 35px;
+    height: 70px;
+}
+
+.nav-link{
+    padding: 0;
+}
+
+.empty-data {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.font-grey {
+    color:white;
+}
+CSS
+
+);
+
 // 获取当前用户的通知
 $user = AdminUser::where('id', auth('admin')->id())->first();
 $notifications = [];

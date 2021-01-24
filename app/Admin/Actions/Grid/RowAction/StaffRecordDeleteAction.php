@@ -2,7 +2,7 @@
 
 namespace App\Admin\Actions\Grid\RowAction;
 
-use App\Services\StaffService;
+use App\Services\StaffRecordService;
 use Dcat\Admin\Actions\Response;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Grid\RowAction;
@@ -23,7 +23,7 @@ class StaffRecordDeleteAction extends RowAction
                 ->refresh();
         }
 
-        StaffService::deleteStaff($this->getKey());
+        StaffRecordService::deleteStaff($this->getKey());
 
         return $this->response()
             ->success('成功删除雇员！')

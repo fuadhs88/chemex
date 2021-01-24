@@ -2,7 +2,7 @@
 
 namespace App\Admin\Actions\Grid\RowAction;
 
-use App\Services\DeviceService;
+use App\Services\DeviceRecordService;
 use Dcat\Admin\Actions\Response;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Grid\RowAction;
@@ -23,7 +23,7 @@ class DeviceRecordDeleteAction extends RowAction
                 ->refresh();
         }
 
-        DeviceService::deviceDelete($this->getKey());
+        DeviceRecordService::deviceDelete($this->getKey());
 
         return $this->response()
             ->success('成功删除设备！')

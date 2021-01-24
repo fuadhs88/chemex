@@ -17,7 +17,7 @@ use App\Models\DeviceCategory;
 use App\Models\PurchasedChannel;
 use App\Models\StaffDepartment;
 use App\Models\VendorRecord;
-use App\Services\DeviceService;
+use App\Services\DeviceRecordService;
 use App\Services\ExpirationService;
 use App\Services\ExportService;
 use App\Support\Info;
@@ -53,7 +53,7 @@ class DeviceRecordController extends AdminController
     public function show($id, Content $content): Content
     {
         $name = Info::deviceIdToStaffName($id);
-        $history = DeviceService::history($id);
+        $history = DeviceRecordService::history($id);
         return $content
             ->title($this->title())
             ->description($this->description()['index'] ?? trans('admin.show'))
@@ -79,19 +79,11 @@ class DeviceRecordController extends AdminController
                 $row->column($column_a_width, $this->detail($id));
                 $row->column($column_b_width, function (Column $column) use ($id, $name, $history) {
                     $column->row(Card::make()->content('当前使用者：' . $name));
-                    // 判断是否启用了配件or软件or服务扩展
-                    $isExtensions = Admin::extension()->enabled('celaraze.chemex-part') || Admin::extension()->enabled('celaraze.chemex-software') || Admin::extension()->enabled('celaraze.chemex-service');
-                    if (Admin::user()->can('device.related') && $isExtensions) {
+                    if (Admin::user()->can('device.related')) {
                         $result = self::hasDeviceRelated($id);
-                        if ($result['part']) {
-                            $column->row(new Card('配件', $result['part']));
-                        }
-                        if ($result['software']) {
-                            $column->row(new Card('软件', $result['software']));
-                        }
-                        if ($result['service']) {
-                            $column->row(new Card('服务', $result['service']));
-                        }
+                        $column->row(new Card('配件', $result['part']));
+                        $column->row(new Card('软件', $result['software']));
+                        $column->row(new Card('服务', $result['service']));
                     }
                 });
                 if (Admin::user()->can('device.history')) {

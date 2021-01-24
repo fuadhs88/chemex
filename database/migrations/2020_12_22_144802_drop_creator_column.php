@@ -28,10 +28,37 @@ class DropCreatorColumn extends Migration
         Schema::table('device_tracks', function (Blueprint $table) {
             $table->dropColumn('creator');
         });
+        Schema::table('hardware_categories', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('hardware_records', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('hardware_tracks', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
         Schema::table('maintenance_records', function (Blueprint $table) {
             $table->dropColumn('creator');
         });
         Schema::table('purchased_channels', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('service_issues', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('service_records', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('service_tracks', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('software_categories', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('software_records', function (Blueprint $table) {
+            $table->dropColumn('creator');
+        });
+        Schema::table('software_tracks', function (Blueprint $table) {
             $table->dropColumn('creator');
         });
         Schema::table('staff_departments', function (Blueprint $table) {

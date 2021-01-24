@@ -7,6 +7,10 @@ namespace App\Support;
 use App\Models\DepreciationRule;
 use App\Models\DeviceCategory;
 use App\Models\DeviceRecord;
+use App\Models\PartCategory;
+use App\Models\PartRecord;
+use App\Models\SoftwareRecord;
+use App\Models\SoftwareTrack;
 use App\Models\StaffRecord;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
@@ -69,24 +73,20 @@ class Info
      */
     public static function getSoftwareIcon($device_id): string
     {
-        $class = 'Celaraze\\Chemex\\Software\\Models\\SoftwareTrack';
-        if (class_exists($class)) {
-            $software_tracks = $class::where('device_id', $device_id)
-                ->get();
-            $tags = Data::softwareTags();
-            $keys = array_keys($tags);
-            foreach ($software_tracks as $software_track) {
-                $name = trim($software_track->software()->withTrashed()->first()->name);
-                for ($n = 0; $n < count($tags); $n++) {
-                    for ($i = 0; $i < count($tags[$keys[$n]]); $i++) {
-                        if (stristr($name, $tags[$keys[$n]][$i]) != false) {
-                            return $keys[$n];
-                        }
+        $software_tracks = SoftwareTrack::where('device_id', $device_id)
+            ->get();
+        $tags = Data::softwareTags();
+        $keys = array_keys($tags);
+        foreach ($software_tracks as $software_track) {
+            $name = trim($software_track->software()->withTrashed()->first()->name);
+            for ($n = 0; $n < count($tags); $n++) {
+                for ($i = 0; $i < count($tags[$keys[$n]]); $i++) {
+                    if (stristr($name, $tags[$keys[$n]][$i]) != false) {
+                        return $keys[$n];
                     }
                 }
             }
         }
-
         return '';
     }
 
@@ -131,40 +131,21 @@ class Info
      */
     public static function itemIdToItemName($item, $item_id): string
     {
-        $item_record = self::getItemRecordByClass($item, $item_id);
+        switch ($item) {
+            case 'part':
+                $item_record = PartRecord::where('id', $item_id)->first();
+                break;
+            case 'software':
+                $item_record = SoftwareRecord::where('id', $item_id)->first();
+                break;
+            default:
+                $item_record = DeviceRecord::where('id', $item_id)->first();
+        }
         if (empty($item_record)) {
             return '失踪了';
         } else {
             return $item_record->name;
         }
-    }
-
-    /**
-     * 通过类名获取对应物资的模型
-     * @param $item
-     * @param $item_id
-     * @return null
-     */
-    public static function getItemRecordByClass($item, $item_id)
-    {
-        $item_record = null;
-        switch ($item) {
-            case 'part':
-                $class = 'Celaraze\\Chemex\\Part\\Models\\PartRecord';
-                if (class_exists($class)) {
-                    $item_record = $class::where('id', $item_id)->first();
-                }
-                break;
-            case 'software':
-                $class = 'Celaraze\\Chemex\\Software\\Models\\SoftwareRecord';
-                if (class_exists($class)) {
-                    $item_record = $class::where('id', $item_id)->first();
-                }
-                break;
-            default:
-                $item_record = DeviceRecord::where('id', $item_id)->first();
-        }
-        return $item_record;
     }
 
     /**
@@ -228,10 +209,8 @@ class Info
             if ($model instanceof DeviceRecord) {
                 $category = DeviceCategory::where('id', $model->category_id)->first();
             }
-            $part_record_class = 'Celaraze\\Chemex\\Part\\Models\\PartRecord';
-            $part_category_class = 'Celaraze\\Chemex\\Part\\Models\\PartCategory';
-            if (class_exists($part_record_class) && $model instanceof $part_record_class) {
-                $category = $part_category_class::where('id', $model->category_id)->first();
+            if ($model instanceof PartRecord) {
+                $category = PartCategory::where('id', $model->category_id)->first();
             }
             if (!empty($category) && !empty($category->depreciation_rule_id)) {
                 $depreciation_rule_id = $category->depreciation_rule_id;
@@ -241,10 +220,5 @@ class Info
         }
 
         return $depreciation_rule_id;
-    }
-
-    public static function extensionStatus($service_provider)
-    {
-        return admin_extension_setting($service_provider);
     }
 }

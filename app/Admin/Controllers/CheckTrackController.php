@@ -7,8 +7,9 @@ use App\Admin\Grid\Displayers\RowActions;
 use App\Admin\Repositories\CheckTrack;
 use App\Models\CheckRecord;
 use App\Models\DeviceRecord;
+use App\Models\PartRecord;
+use App\Models\SoftwareRecord;
 use App\Support\Data;
-use App\Support\Info;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Grid;
 use Dcat\Admin\Http\Controllers\AdminController;
@@ -36,7 +37,16 @@ class CheckTrackController extends AdminController
                     return '任务状态异常';
                 } else {
                     $check_item = $check->check_item;
-                    $item = Info::getItemRecordByClass($check_item,$item_id);
+                    switch ($check_item) {
+                        case 'part':
+                            $item = PartRecord::where('id', $item_id)->first();
+                            break;
+                        case 'software':
+                            $item = SoftwareRecord::where('id', $item_id)->first();
+                            break;
+                        default:
+                            $item = DeviceRecord::where('id', $item_id)->first();
+                    }
                     if (empty($item)) {
                         return '物品状态异常';
                     } else {

@@ -16,6 +16,12 @@ class UpdateItemCategoriesParentIdColumn extends Migration
         Schema::table('device_categories', function (Blueprint $table) {
             $table->integer('parent_id')->nullable()->default(null)->change();
         });
+        Schema::table('part_categories', function (Blueprint $table) {
+            $table->integer('parent_id')->nullable()->default(null)->change();
+        });
+        Schema::table('software_categories', function (Blueprint $table) {
+            $table->integer('parent_id')->nullable()->default(null)->change();
+        });
     }
 
     /**
@@ -26,6 +32,12 @@ class UpdateItemCategoriesParentIdColumn extends Migration
     public function down()
     {
         Schema::table('device_categories', function (Blueprint $table) {
+            $table->integer('parent_id')->default(0)->change();
+        });
+        Schema::table('part_categories', function (Blueprint $table) {
+            $table->integer('parent_id')->default(0)->change();
+        });
+        Schema::table('software_categories', function (Blueprint $table) {
             $table->integer('parent_id')->default(0)->change();
         });
     }

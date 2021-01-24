@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Models\DeviceRecord;
+use App\Models\SoftwareRecord;
 use Dcat\EasyExcel\Excel;
 
 /**
@@ -19,7 +20,7 @@ class ExportService
      * @param $device_id
      * @return mixed
      */
-    public static function deviceHistory($device_id)
+    public static function DeviceHistory($device_id)
     {
         $device = DeviceRecord::where('id', $device_id)->first();
         if (empty($device)) {
@@ -27,7 +28,24 @@ class ExportService
         } else {
             $name = $device->name;
         }
-        $history = DeviceService::history($device_id);
+        $history = DeviceRecordService::history($device_id);
+        return Excel::export($history)->download($name . '履历清单.xlsx');
+    }
+
+    /**
+     * 软件履历导出
+     * @param $software_id
+     * @return mixed
+     */
+    public static function SoftwareHistory($software_id)
+    {
+        $software = SoftwareRecord::where('id', $software_id)->first();
+        if (empty($software)) {
+            $name = '未知';
+        } else {
+            $name = $software->name;
+        }
+        $history = SoftwareRecordService::history($software_id);
         return Excel::export($history)->download($name . '履历清单.xlsx');
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CheckRecord;
 use App\Models\CheckTrack;
-use App\Support\Info;
+use App\Models\DeviceRecord;
+use App\Models\PartRecord;
+use App\Models\SoftwareRecord;
 use Illuminate\Http\JsonResponse;
 use Pour\Base\Uni;
 
@@ -33,7 +35,16 @@ class CheckController extends Controller
                 $return = Uni::rr(404, '没有找到相对应的盘点任务');
                 return response()->json($return);
             }
-            $item = Info::getItemRecordByClass($item, $id);
+            switch ($item) {
+                case 'part':
+                    $item = PartRecord::where('id', $id)->first();
+                    break;
+                case 'software':
+                    $item = SoftwareRecord::where('id', $id)->first();
+                    break;
+                default:
+                    $item = DeviceRecord::where('id', $id)->first();
+            }
             if (empty($item)) {
                 $return = Uni::rr(404, '没有找到对应的物品');
             } else {

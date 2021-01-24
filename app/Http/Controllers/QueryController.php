@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeviceRecord;
 use App\Models\PartRecord;
 use App\Models\SoftwareRecord;
-use App\Support\Info;
 use Illuminate\Http\JsonResponse;
 use Pour\Base\Uni;
 
@@ -25,8 +25,23 @@ class QueryController extends Controller
     {
         $item = explode(':', $string)[0];
         $id = explode(':', $string)[1];
-        $item = Info::getItemRecordByClass($item, $id);
-        optional($item->staff)->department;
+        switch ($item) {
+            case 'device':
+                $item = DeviceRecord::where('id', $id)
+                    ->first();
+                optional($item->staff)->department;
+                break;
+            case 'part':
+                $item = PartRecord::where('id', $id)
+                    ->first();
+                break;
+            case 'software':
+                $item = SoftwareRecord::where('id', $id)
+                    ->first();
+                break;
+            default:
+                $item = [];
+        }
         $item->category;
         $item->vendor;
         $item->channel;

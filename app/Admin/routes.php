@@ -3,6 +3,7 @@
 use App\Admin\Controllers\CheckRecordController;
 use App\Admin\Controllers\DeviceRecordController;
 use App\Admin\Controllers\NotificationController;
+use App\Admin\Controllers\SoftwareRecordController;
 use Dcat\Admin\Admin;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,54 @@ Route::group([
     ]]);
 
     /**
+     * 配件管理
+     */
+    $router->resource('/part/records', 'PartRecordController', ['names' => [
+        'index' => 'part.records.index',
+        'show' => 'part.records.show'
+    ]]);
+    $router->resource('/part/tracks', 'PartTrackController', ['names' => [
+        'index' => 'part.tracks.index',
+        'show' => 'part.tracks.show'
+    ]]);
+    $router->resource('/part/categories', 'PartCategoryController', ['names' => [
+        'index' => 'part.categories.index',
+        'show' => 'part.categories.show'
+    ]]);
+
+    /**
+     * 软件管理
+     */
+    $router->resource('/software/records', 'SoftwareRecordController', ['names' => [
+        'index' => 'software.records.index',
+        'show' => 'software.records.show'
+    ]]);
+    $router->resource('/software/categories', 'SoftwareCategoryController', ['names' => [
+        'index' => 'software.categories.index',
+        'show' => 'software.categories.show'
+    ]]);
+    $router->resource('/software/tracks', 'SoftwareTrackController', ['names' => [
+        'index' => 'software.tracks.index',
+        'show' => 'software.tracks.show'
+    ]]);
+
+    /**
+     * 耗材管理
+     */
+    $router->resource('/consumable/records', 'ConsumableRecordController', ['names' => [
+        'index' => 'consumable.records.index',
+        'show' => 'consumable.records.show'
+    ]]);
+    $router->resource('/consumable/categories', 'ConsumableCategoryController', ['names' => [
+        'index' => 'consumable.categories.index',
+        'show' => 'consumable.categories.show'
+    ]]);
+    $router->resource('/consumable/tracks', 'ConsumableTrackController', ['names' => [
+        'index' => 'consumable.tracks.index',
+        'show' => 'consumable.tracks.show'
+    ]]);
+
+    /**
      * 厂商管理
      */
     $router->resource('/vendor/records', 'VendorRecordController');
@@ -95,6 +144,18 @@ Route::group([
     $router->resource('/check/tracks', 'CheckTrackController');
 
     /**
+     * 服务管理
+     */
+    $router->resource('/service/records', 'ServiceRecordController', ['names' => [
+        'index' => 'service.records.index',
+        'show' => 'service.records.show'
+    ]]);
+    $router->resource('/service/issues', 'ServiceIssueController', ['names' => [
+        'index' => 'service.issues.index'
+    ]]);
+    $router->resource('/service/tracks', 'ServiceTrackController');
+
+    /**
      * 故障维护
      */
     $router->resource('/maintenance/records', 'MaintenanceRecordController');
@@ -111,9 +172,11 @@ Route::group([
 
     /**
      * 导出
-     *///TODO
+     */
     $router->get('/export/device/{device_id}/history', [DeviceRecordController::class, 'exportHistory'])
         ->name('export.device.history');
+    $router->get('/export/software/{software_id}/history', [SoftwareRecordController::class, 'exportHistory'])
+        ->name('export.software.history');
     $router->get('/export/check/{check_id}/report', [CheckRecordController::class, 'exportReport'])
         ->name('export.check.report');
 

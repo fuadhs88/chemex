@@ -32,6 +32,30 @@ class AdminTablesSeeder extends Seeder
                     "updated_at" => "2020-12-29 21:39:06"
                 ],
                 [
+                    "id" => 8,
+                    "parent_id" => 0,
+                    "order" => 8,
+                    "title" => "Software Management",
+                    "icon" => "feather icon-disc",
+                    "uri" => "",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:21",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
+                    "id" => 9,
+                    "parent_id" => 8,
+                    "order" => 10,
+                    "title" => "Software Categories",
+                    "icon" => "",
+                    "uri" => "software/categories",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:22",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
                     "id" => 11,
                     "parent_id" => 0,
                     "order" => 25,
@@ -42,6 +66,54 @@ class AdminTablesSeeder extends Seeder
                     "show" => 1,
                     "created_at" => "2020-10-10 15:06:23",
                     "updated_at" => "2020-11-18 21:14:55"
+                ],
+                [
+                    "id" => 12,
+                    "parent_id" => 8,
+                    "order" => 9,
+                    "title" => "Software Records",
+                    "icon" => "",
+                    "uri" => "software/records",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:23",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
+                    "id" => 13,
+                    "parent_id" => 0,
+                    "order" => 12,
+                    "title" => "Part Management",
+                    "icon" => "feather icon-server",
+                    "uri" => NULL,
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:24",
+                    "updated_at" => "2020-12-24 20:43:40"
+                ],
+                [
+                    "id" => 14,
+                    "parent_id" => 13,
+                    "order" => 14,
+                    "title" => "Part Categories",
+                    "icon" => "",
+                    "uri" => "part/categories",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:24",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
+                    "id" => 15,
+                    "parent_id" => 13,
+                    "order" => 13,
+                    "title" => "Part Records",
+                    "icon" => "",
+                    "uri" => "part/records",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:24",
+                    "updated_at" => "2020-12-19 01:10:31"
                 ],
                 [
                     "id" => 16,
@@ -116,6 +188,30 @@ class AdminTablesSeeder extends Seeder
                     "updated_at" => "2020-12-19 01:10:31"
                 ],
                 [
+                    "id" => 22,
+                    "parent_id" => 8,
+                    "order" => 11,
+                    "title" => "Software Tracks",
+                    "icon" => "",
+                    "uri" => "software/tracks",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:28",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
+                    "id" => 23,
+                    "parent_id" => 13,
+                    "order" => 15,
+                    "title" => "Part Tracks",
+                    "icon" => "",
+                    "uri" => "part/tracks",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-10 15:06:29",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
                     "id" => 24,
                     "parent_id" => 16,
                     "order" => 7,
@@ -162,6 +258,54 @@ class AdminTablesSeeder extends Seeder
                     "show" => 1,
                     "created_at" => "2020-10-04 10:23:33",
                     "updated_at" => "2020-12-19 01:10:21"
+                ],
+                [
+                    "id" => 28,
+                    "parent_id" => 0,
+                    "order" => 19,
+                    "title" => "Service Management",
+                    "icon" => "feather icon-activity",
+                    "uri" => NULL,
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-06 21:38:40",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
+                    "id" => 29,
+                    "parent_id" => 28,
+                    "order" => 20,
+                    "title" => "Service Records",
+                    "icon" => NULL,
+                    "uri" => "service/records",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-06 21:39:02",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
+                    "id" => 30,
+                    "parent_id" => 28,
+                    "order" => 21,
+                    "title" => "Service Tracks",
+                    "icon" => NULL,
+                    "uri" => "service/tracks",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-06 22:02:15",
+                    "updated_at" => "2020-12-19 01:10:31"
+                ],
+                [
+                    "id" => 31,
+                    "parent_id" => 0,
+                    "order" => 3,
+                    "title" => "Service Issues",
+                    "icon" => "feather icon-alert-triangle",
+                    "uri" => "service/issues",
+                    "extension" => "",
+                    "show" => 1,
+                    "created_at" => "2020-10-06 23:23:22",
+                    "updated_at" => "2020-12-19 01:10:40"
                 ],
                 [
                     "id" => 53,
@@ -1274,14 +1418,39 @@ class AdminTablesSeeder extends Seeder
 		Models\Extension::truncate();
 		Models\Extension::insert(
 			[
-
+                [
+                    "id" => 6,
+                    "name" => "celaraze.colorful-bar",
+                    "version" => "1.0.0",
+                    "is_enabled" => 0,
+                    "options" => NULL,
+                    "created_at" => NULL,
+                    "updated_at" => "2020-11-09 15:51:07"
+                ],
+                [
+                    "id" => 7,
+                    "name" => "celaraze.dcatadmin-menu-switch",
+                    "version" => "1.0.0",
+                    "is_enabled" => 1,
+                    "options" => NULL,
+                    "created_at" => "2020-11-09 15:55:26",
+                    "updated_at" => "2020-11-09 15:55:30"
+                ]
             ]
 		);
 
 		Models\ExtensionHistory::truncate();
 		Models\ExtensionHistory::insert(
 			[
-
+                [
+                    "id" => 7,
+                    "name" => "celaraze.dcatadmin-menu-switch",
+                    "type" => 1,
+                    "version" => "1.0.0",
+                    "detail" => "Initialize extension.",
+                    "created_at" => "2020-11-09 15:55:26",
+                    "updated_at" => "2020-11-09 15:55:26"
+                ]
             ]
 		);
 
@@ -2002,12 +2171,12 @@ class AdminTablesSeeder extends Seeder
                 [
                     "id" => 1,
                     "username" => "admin",
-                    "password" => "\$2y\$10\$FXUHalDQfy1nTA6IO5D.huoxAsHdlIESqnGJNGpGaidfCz4TYPvuS",
+                    "password" => "\$2y\$10\$eJMZneFCSx.ct3kvBY2ZrOiOvSkq/WE/eFrtuA7JWIk7cx2Wog6qi",
                     "name" => "Administrator",
                     "avatar" => NULL,
                     "remember_token" => NULL,
                     "created_at" => "2020-11-30 09:58:49",
-                    "updated_at" => "2021-01-22 13:11:04"
+                    "updated_at" => "2020-12-28 22:08:58"
                 ]
             ]
         );

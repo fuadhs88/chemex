@@ -5,6 +5,8 @@ namespace App\Support;
 
 
 use App\Models\DeviceRecord;
+use App\Models\PartRecord;
+use App\Models\SoftwareRecord;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Widgets\Alert;
 
@@ -218,19 +220,8 @@ class Data
     {
         $data = [];
         $device_records = DeviceRecord::all();
-        if (Admin::extension()->enabled('celaraze/chemex-part')) {
-            $class = 'Celaraze\\Chemex\\Part\\Models\\PartRecord';
-            $part_records = $class::all();
-        } else {
-            $part_records = [];
-        }
-        if (Admin::extension()->enabled('celaraze/chemex-software')) {
-            $class = 'Celaraze\\Chemex\\Software\\Models\\SoftwareRecord';
-            $software_records = $class::all();
-        } else {
-            $software_records = [];
-        }
-
+        $part_records = PartRecord::all();
+        $software_records = SoftwareRecord::all();
         foreach ($device_records as $device_record) {
             array_push($data, 'device:' . $device_record->id . '&#10;');
         }

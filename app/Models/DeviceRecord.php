@@ -70,8 +70,8 @@ class DeviceRecord extends Model
     public function part(): HasManyThrough
     {
         return $this->hasManyThrough(
-            "Celaraze\\Chemex\\Part\\Models\\PartRecord",  // 远程表
-            "Celaraze\\Chemex\\Part\\Models\\PartTrack",   // 中间表
+            PartRecord::class,  // 远程表
+            PartTrack::class,   // 中间表
             'device_id',    // 中间表对主表的关联字段
             'id',   // 远程表对中间表的关联字段
             'id',   // 主表对中间表的关联字段
@@ -85,8 +85,8 @@ class DeviceRecord extends Model
     public function software(): HasManyThrough
     {
         return $this->hasManyThrough(
-            "Celaraze\\Chemex\\Software\\Models\\SoftwareRecord",  // 远程表
-            "Celaraze\\Chemex\\Software\\Models\\SoftwareTrack",  // 中间表
+            SoftwareRecord::class,  // 远程表
+            SoftwareTrack::class,   // 中间表
             'device_id',    // 中间表对主表的关联字段
             'id',   // 远程表对中间表的关联字段
             'id',   // 主表对中间表的关联字段
@@ -100,8 +100,8 @@ class DeviceRecord extends Model
     public function service(): HasManyThrough
     {
         return $this->hasManyThrough(
-            "Celaraze\\Chemex\\Service\\Models\\ServiceRecord",  // 远程表
-            "Celaraze\\Chemex\\Service\\Models\\ServiceTrack",  // 中间表
+            ServiceRecord::class,  // 远程表
+            ServiceTrack::class,   // 中间表
             'device_id',    // 中间表对主表的关联字段
             'id',   // 远程表对中间表的关联字段
             'id',   // 主表对中间表的关联字段

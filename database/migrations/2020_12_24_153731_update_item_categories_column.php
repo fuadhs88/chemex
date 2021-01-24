@@ -17,6 +17,14 @@ class UpdateItemCategoriesColumn extends Migration
             $table->integer('parent_id')->default(0);
             $table->string('order')->default(0);
         });
+        Schema::table('hardware_categories', function (Blueprint $table) {
+            $table->integer('parent_id')->default(0);
+            $table->string('order')->default(0);
+        });
+        Schema::table('software_categories', function (Blueprint $table) {
+            $table->integer('parent_id')->default(0);
+            $table->string('order')->default(0);
+        });
     }
 
     /**
@@ -27,6 +35,14 @@ class UpdateItemCategoriesColumn extends Migration
     public function down()
     {
         Schema::table('device_categories', function (Blueprint $table) {
+            $table->dropColumn('parent_id');
+            $table->dropColumn('order');
+        });
+        Schema::table('hardware_categories', function (Blueprint $table) {
+            $table->dropColumn('parent_id');
+            $table->dropColumn('order');
+        });
+        Schema::table('software_categories', function (Blueprint $table) {
             $table->dropColumn('parent_id');
             $table->dropColumn('order');
         });

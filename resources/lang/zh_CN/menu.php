@@ -47,5 +47,9 @@ return [
         'configuration_site' => '站点配置',
         'configuration_ldap' => 'LDAP配置',
         'operation_logs' => '操作日志',
+        'consumable_management' => '耗材管理',
+        'consumable_records' => '耗材',
+        'consumable_categories' => '耗材分类',
+        'consumable_tracks' => '耗材记录'
     ],
 ];

@@ -7,13 +7,17 @@ use App\Admin\Metrics\DeviceCounts;
 use App\Admin\Metrics\DeviceWorth;
 use App\Admin\Metrics\IssueTrend;
 use App\Admin\Metrics\MaintenanceTrend;
+use App\Admin\Metrics\PartCounts;
+use App\Admin\Metrics\PartWorth;
 use App\Admin\Metrics\ServiceCounts;
 use App\Admin\Metrics\ServiceIssueCounts;
+use App\Admin\Metrics\SoftwareCounts;
+use App\Admin\Metrics\SoftwareWorth;
 use App\Admin\Metrics\StaffCounts;
 use App\Admin\Metrics\WorthTrend;
 use App\Http\Controllers\Controller;
 use App\Models\AdminUser;
-use Dcat\Admin\Admin;
+use App\Support\Track;
 use Dcat\Admin\Layout\Column;
 use Dcat\Admin\Layout\Content;
 use Dcat\Admin\Layout\Row;
@@ -36,45 +40,23 @@ class HomeController extends Controller
                             $column->row(new Card('我的待办', view('todo')->with('notifications', $notifications)));
                             $column->row(new WorthTrend());
                             $column->row(new MaintenanceTrend());
-                            if (Admin::extension()->enabled('celaraze.chemex-service')) {
-                                $class = "Celaraze\\Chemex\\Service\\Metrics\\IssueTrend";
-                                $column->row(new $class);
-                            }
+                            $column->row(new IssueTrend());
                         });
                         $row->column(9, function (Column $column) {
                             $column->row(function (Row $row) {
                                 $row->column(3, new AllWorth());
                                 $row->column(3, new DeviceWorth());
-                                if (Admin::extension()->enabled('celaraze.chemex-part')) {
-                                    $class = "Celaraze\\Chemex\\Part\\Metrics\\PartWorth";
-                                    $row->column(3, new $class);
-                                }
-                                if (Admin::extension()->enabled('celaraze.chemex-software')) {
-                                    $class = "Celaraze\\Chemex\\Software\\Metrics\\SoftwareWorth";
-                                    $row->column(3, new $class);
-                                }
+                                $row->column(3, new PartWorth());
+                                $row->column(3, new SoftwareWorth());
                                 $row->column(3, new DeviceCounts());
-                                if (Admin::extension()->enabled('celaraze.chemex-part')) {
-                                    $class = "Celaraze\\Chemex\\Part\\Metrics\\PartCounts";
-                                    $row->column(3, new $class);
-                                }
-                                if (Admin::extension()->enabled('celaraze.chemex-software')) {
-                                    $class = "Celaraze\\Chemex\\Software\\Metrics\\SoftwareCounts";
-                                    $row->column(3, new $class);
-                                }
+                                $row->column(3, new PartCounts());
+                                $row->column(3, new SoftwareCounts());
                                 $row->column(3, new StaffCounts());
-                                if (Admin::extension()->enabled('celaraze.chemex-service')) {
-                                    $class = "Celaraze\\Chemex\\Service\\Metrics\\ServiceCounts";
-                                    $row->column(3, new $class);
-                                    $class = "Celaraze\\Chemex\\Service\\Metrics\\ServiceIssueCounts";
-                                    $row->column(3, new $class);
-                                }
+                                $row->column(3, new ServiceCounts());
+                                $row->column(3, new ServiceIssueCounts());
                             });
-                            $class = "Celaraze\\Chemex\\Service\\Support";
-                            if (Admin::extension()->enabled('celaraze.chemex-service')) {
-                                $services = $class::getServiceIssueStatus();
-                                $column->row(new Card('服务程序状态', view('services_dashboard')->with('services', $services)));
-                            }
+                            $services = Track::getServiceIssueStatus();
+                            $column->row(new Card('服务程序状态', view('services_dashboard')->with('services', $services)));
                         });
                     });
                 });

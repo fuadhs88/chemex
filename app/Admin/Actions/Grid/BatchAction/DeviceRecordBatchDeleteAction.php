@@ -2,7 +2,7 @@
 
 namespace App\Admin\Actions\Grid\BatchAction;
 
-use App\Services\DeviceService;
+use App\Services\DeviceRecordService;
 use Dcat\Admin\Actions\Response;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Grid\BatchAction;
@@ -32,7 +32,7 @@ class DeviceRecordBatchDeleteAction extends BatchAction
         $keys = $this->getKey();
 
         foreach ($keys as $key) {
-            DeviceService::deviceDelete($key);
+            DeviceRecordService::deviceDelete($key);
         }
 
         return $this->response()->success('批量删除设备成功！')->refresh();

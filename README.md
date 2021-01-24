@@ -1,17 +1,14 @@
-> genesis 分支与以往版本完全不兼容，请不要视图在 2.x 版本上升级使用 genesis 分支，目前还在开发，且是一个全新的架构。
-> 任何不兼容的升级都可能导致数据丢失，请万分注意。
-
 <p align="center">
     <img src="https://chemex.celaraze.com/chemex-red.png" width="120" height="120"/>
 </p>
 
 <p align="center">
-<a href="http://chemex.it" target="_blank">咖啡壶（chemex）官方网站</a> |
-<a href="https://chemex.famio.cn" target="_blank">Demo 演示站点</a>
+<a href="http://chemex.it" target="_blank">咖啡壶（Chemex）官方网站</a> |
+<a href="https://chemex.famio.cn" target="_blank">Demo 演示站点</a> |
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Latest Release-3.0.0-orange" />
+    <img src="https://img.shields.io/badge/Latest Release-2.1.0-orange" />
     <img src="https://img.shields.io/badge/PHP-7.3+-green" />
     <img src="https://img.shields.io/badge/MariaDB-10.2+-blueviolet" />
     <img src="https://img.shields.io/badge/License-GPL3.0-blue" />
@@ -63,9 +60,17 @@
 
 ## 简介
 
+加入用户微信群请添加微信号 `Celaraze`，并且备注 Chemex 用户，无备注将不会通过，有问题可以在群内反馈讨论，非紧急也请不要@我，多次影响我作息会被请出，恕不私聊。
+但请时刻记住，这是一个开源项目，作者没有义务对每个需求进行开发或者是对每个用户的问题进行解答，我希望它成为一个标准化的开源产品，而不是按照每个人的想法去加各种多样的定制功能，因此每个提交的需求我都会慎重考虑是否适用。
+毫不例外，我更希望你能多动手来对咖啡壶贡献，而不是多抱怨。
+
 咖啡壶（Chemex）是一个轻量的、现代设计风格的 ICT 资产管理系统。得益于 [Laravel](https://laravel.com/) 框架以及 [Dcat Admin](https://dcatadmin.com)
 开发平台，使其具备了优雅、简洁的优秀体验。 咖啡壶（Chemex）
 是完全免费且开源的，任何人都可以无限制的修改代码以及部署服务，这对于很多想要对ICT资产做信息化管理的中小型企业来说，是一个很好的选择：低廉的成本换回的是高效的管理方案，同时又有健康的生态提供支持。
+
+<p align="center">
+    <img src="https://oss.celaraze.com/chemex/Chemex%20%E5%92%96%E5%95%A1%E5%A3%B6%20%281%29.png" />
+</p>
 
 `1.x` 版本升级到 `2.x`
 版本请参考：[1.x升级2.x的操作方式](https://gitee.com/celaraze/Chemex/wikis/1.x%E5%8D%87%E7%BA%A72.x%E7%9A%84%E6%93%8D%E4%BD%9C%E6%96%B9%E5%BC%8F)

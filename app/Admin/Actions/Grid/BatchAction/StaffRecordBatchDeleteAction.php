@@ -2,7 +2,7 @@
 
 namespace App\Admin\Actions\Grid\BatchAction;
 
-use App\Services\StaffService;
+use App\Services\StaffRecordService;
 use Dcat\Admin\Actions\Response;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Grid\BatchAction;
@@ -32,7 +32,7 @@ class StaffRecordBatchDeleteAction extends BatchAction
         $keys = $this->getKey();
 
         foreach ($keys as $key) {
-            StaffService::deleteStaff($key);
+            StaffRecordService::deleteStaff($key);
         }
 
         return $this->response()->success('批量删除雇员成功！')->refresh();

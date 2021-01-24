@@ -38,6 +38,8 @@ class Fill extends Command
     public function handle(): int
     {
         $this->call('db:seed', ['--class' => 'DeviceCategoriesTableSeeder']);
+        $this->call('db:seed', ['--class' => 'PartCategoriesTableSeeder']);
+        $this->call('db:seed', ['--class' => 'SoftwareCategoriesTableSeeder']);
         $this->call('db:seed', ['--class' => 'VendorRecordsTableSeeder']);
         return 0;
     }
